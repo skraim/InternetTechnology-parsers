@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <!DOCTYPE inv:inventoryList> -->
+<inv:inventoryList xmlns:inv="http://nure.ua/sportInventory" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://nure.ua/sportInventory xsd/sportInventory.xsd">
+    <inv:inventory id="1">
+        <inv:type>Skates</inv:type>
+        <inv:originCountry>Germany</inv:originCountry>
+        <inv:concern>SEBA</inv:concern>
+        <inv:model>FR2</inv:model>
+        <inv:year>2014</inv:year>
+        <inv:size scale="clothingsize-USA">XXL</inv:size>
+        <inv:priceInHour currency="UAH">30</inv:priceInHour>
+        <inv:priceInADay currency="UAH">100</inv:priceInADay>
+    </inv:inventory>
+    <inv:inventory id="2">
+        <inv:type>Snowboard</inv:type>
+        <inv:originCountry>USA</inv:originCountry>
+        <inv:concern>Burton</inv:concern>
+        <inv:model>CHICKLET</inv:model>
+        <inv:year>2016</inv:year>
+        <inv:gender>Junior</inv:gender>
+        <inv:size scale="length-cm">92</inv:size>
+        <inv:priceInHour currency="UAH">30</inv:priceInHour>
+        <inv:priceInADay currency="UAH">110</inv:priceInADay>
+    </inv:inventory>
+    <inv:inventory id="3">
+        <inv:type>Skis</inv:type>
+        <inv:originCountry>Austria</inv:originCountry>
+        <inv:concern>TISA</inv:concern>
+        <inv:model>Top Universal WAX</inv:model>
+        <inv:year>2013</inv:year>
+        <inv:size scale="length-cm">192</inv:size>
+        <inv:priceInHour currency="UAH">40</inv:priceInHour>
+        <inv:priceInADay currency="UAH">130</inv:priceInADay>
+    </inv:inventory>
+</inv:inventoryList>

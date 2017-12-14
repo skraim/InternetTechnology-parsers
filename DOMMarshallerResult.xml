@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<inventoryList>
+    <inventory id="1">
+        <type>Skates</type>
+        <originCountry>Germany</originCountry>
+        <concern>SEBA</concern>
+        <model>FR2</model>
+        <year>2014</year>
+        <gender>Any</gender>
+        <size scale="clothingsize-USA">XXL</size>
+        <priceInHour currency="UAH">30.0</priceInHour>
+        <priceInADay currency="UAH">100.0</priceInADay>
+    </inventory>
+    <inventory id="2">
+        <type>Snowboard</type>
+        <originCountry>USA</originCountry>
+        <concern>Burton</concern>
+        <model>CHICKLET</model>
+        <year>2016</year>
+        <gender>Junior</gender>
+        <size scale="length-cm">92</size>
+        <priceInHour currency="UAH">30.0</priceInHour>
+        <priceInADay currency="UAH">110.0</priceInADay>
+    </inventory>
+    <inventory id="3">
+        <type>Skis</type>
+        <originCountry>Austria</originCountry>
+        <concern>TISA</concern>
+        <model>Top Universal WAX</model>
+        <year>2013</year>
+        <gender>Any</gender>
+        <size scale="length-cm">192</size>
+        <priceInHour currency="UAH">40.0</priceInHour>
+        <priceInADay currency="UAH">130.0</priceInADay>
+    </inventory>
+</inventoryList>

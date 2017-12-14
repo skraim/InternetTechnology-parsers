@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://nure.ua/sportInventory"
+            xmlns:inv="http://nure.ua/sportInventory"
+            elementFormDefault="qualified">
+
+    <xsd:element name="inventoryList">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="inventory" type="inv:inventory" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="inventory">
+        <xsd:complexContent>
+            <xsd:extension base="inv:entity">
+                <xsd:sequence>
+                    <xsd:element name="type" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="originCountry" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="concern" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="model" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="year" minOccurs="1" maxOccurs="1">
+                    	<xsd:simpleType>
+                    		<xsd:restriction base="xsd:int">
+                    			<xsd:totalDigits value="4"/>
+                                <xsd:minInclusive value="1900"/>
+                            </xsd:restriction>
+                    	</xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="gender" type="inv:gender" default="Any" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="size" type="inv:size" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="priceInHour" type="inv:priceType" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="priceInADay" type="inv:priceType" minOccurs="0" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+	<xsd:complexType name="size">
+		<xsd:simpleContent>
+			<xsd:extension base="inv:sizeValue">
+				<xsd:attribute name="scale" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="length-cm"/>
+							<xsd:enumeration value="footsize-EUR"/>
+							<xsd:enumeration value="clothingsize-USA"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+	<xsd:simpleType name="sizeValue">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="4"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="gender">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Male"/>
+			<xsd:enumeration value="Female"/>
+			<xsd:enumeration value="Junior"/>
+			<xsd:enumeration value="Any"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="priceValueType">
+		<xsd:restriction base="xsd:double">
+			<xsd:minInclusive value="0"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="priceType">
+		<xsd:simpleContent>
+			<xsd:extension base="inv:priceValueType">
+				<xsd:attribute name="currency" default="UAH">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="UAH"/>
+							<xsd:enumeration value="RUB"/>
+							<xsd:enumeration value="USD"/>
+							<xsd:enumeration value="EUR"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+    <xsd:complexType name="entity" abstract="true">
+        <xsd:attribute name="id" type="inv:entityId" use="required" />
+    </xsd:complexType>
+
+    <xsd:simpleType name="entityId">
+        <xsd:restriction base="xsd:int">
+            <xsd:minInclusive value="-1"/>
+            <xsd:maxExclusive value="99999999"/>
+            <xsd:pattern value="[0-9]*"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>
