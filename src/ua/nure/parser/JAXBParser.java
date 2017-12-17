@@ -18,7 +18,8 @@ import ua.nure.sportinventory.InventoryList;
 
 public class JAXBParser {
 
-	public InventoryList parser(FileInputStream is) throws JAXBException, SAXException {
+	public InventoryList parser(String fileName) throws JAXBException, SAXException, FileNotFoundException {
+		InputStream is = new FileInputStream(fileName);
 		JAXBContext con = JAXBContext.newInstance(Const.OBJECT_FACTORY);
 		Unmarshaller unMarsh = con.createUnmarshaller();
 		SchemaFactory schFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
@@ -64,12 +65,8 @@ public class JAXBParser {
 
 	public static void main(String[] args) throws JAXBException, SAXException, FileNotFoundException {
 		JAXBParser jbp = new JAXBParser();
-		InventoryList invs = jbp.parser(new FileInputStream(Const.XML_FILE));
-
-		System.out.println("--== JAXB Parser ==--");
-		System.out.println("====================================");
-		System.out.println("Here is the inventory list: \n" + invs.getInventory());
-		System.out.println("====================================");
+		InventoryList invs = jbp.parser(Const.XML_FILE);
+		invs.getInventory().forEach(System.out::println);
 
 		try {
 			saveOrders(invs, "JAXBMarshallerResult.xml", Const.XSD_FILE, Const.OBJECT_FACTORY);

@@ -19,42 +19,42 @@ import ua.nure.sportinventory.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.List;
 
 
-public class DOMmarsh {
+public class DOMMarsh {
 
-    private List<Inventory> inventories;
-    private Element inv;
-    private Element type;
-    private Element origCountry;
-    private Element concern;
-    private Element model;
-    private Element year;
-    private Element gender;
-    private Element size;
-    private Element priceInHour;
-    private Element priceInADay;
+    private InventoryList inventories;
+
 
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, JAXBException, TransformerException {
-        DOMmarsh marshaller = new DOMmarsh();
+        DOMMarsh marshaller = new DOMMarsh();
         marshaller.parseBefore();
         marshaller.makeWork();
     }
 
     public void parseBefore() throws IOException, SAXException, ParserConfigurationException {
         DOMParser domParser = new DOMParser();
-        inventories = domParser.parse(new FileInputStream("SportInventory.xml"));
+        inventories = domParser.parse(Const.XML_FILE);
     }
 
     public void makeWork() throws ParserConfigurationException, JAXBException, TransformerException {
+        Element inv;
+        Element type;
+        Element origCountry;
+        Element concern;
+        Element model;
+        Element year;
+        Element gender;
+        Element size;
+        Element priceInHour;
+        Element priceInADay;
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = factory.newDocumentBuilder();
         Document document = documentBuilder.newDocument();
 
         Element invList = document.createElement("inventoryList");
         document.appendChild(invList);
-        for (Inventory thisInventory : inventories) {
+        for (Inventory thisInventory : inventories.getInventory()) {
             inv = document.createElement("inventory");
             Attr attrInventory = document.createAttribute("id");
             attrInventory.setValue(thisInventory.getId()+"");
@@ -97,6 +97,7 @@ public class DOMmarsh {
             priceInADay.appendChild(document.createTextNode(thisInventory.getPriceInADay().getValue()+""));
             inv.appendChild(priceInADay);
         }
+
         TransformerFactory tf = TransformerFactory.newInstance();
         tf.newTransformer().transform(new DOMSource(document),
                 new StreamResult(new File("DOMMarshallerResult.xml")));

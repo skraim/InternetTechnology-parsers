@@ -292,8 +292,19 @@ public class Inventory
         this.priceInADay = value;
     }
 
+    @Override
     public String toString() {
-    	String out = type+": "+concern+" "+model+"("+size+")";
-    	return out;
+        return "Inventory{" +
+                "id=" + id + '\'' +
+                ", type='" + type + '\'' +
+                ", originCountry='" + originCountry + '\'' +
+                ", concern='" + concern + '\'' +
+                ", model='" + model + '\'' +
+                ", year=" + year +
+                ", gender=" + gender +
+                ", size=" + size + "(" + size.getScale() + ")" +
+                ", priceInHour=" + priceInHour + priceInHour.getCurrency() +
+                ", priceInADay=" + priceInADay + priceInADay.getCurrency() +
+                '}';
     }
 }

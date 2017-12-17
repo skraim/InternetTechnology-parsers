@@ -8,20 +8,16 @@
 
 package ua.nure.sportinventory;
 
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -33,12 +29,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "inventory"
+        "inventory"
 })
 @XmlRootElement(name = "inventoryList")
 public class InventoryList {
@@ -48,25 +42,23 @@ public class InventoryList {
 
     /**
      * Gets the value of the inventory property.
-     * 
+     * <p>
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the inventory property.
-     * 
+     * <p>
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getInventory().add(newItem);
      * </pre>
-     * 
-     * 
+     * <p>
+     * <p>
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Inventory }
-     * 
-     * 
      */
     public List<Inventory> getInventory() {
         if (inventory == null) {
@@ -75,4 +67,14 @@ public class InventoryList {
         return this.inventory;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("InventoryList{").append(System.lineSeparator());
+        for (Inventory inv : getInventory()) {
+            sb.append(inv).append(System.lineSeparator());
+        }
+        sb.append("}");
+        return sb.toString();
+    }
 }

@@ -1,9 +1,8 @@
 package ua.nure.parser;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -22,7 +21,15 @@ import ua.nure.sportinventory.*;
 
 public class DOMParser {
 
-	public List<Inventory> parse(InputStream in) throws ParserConfigurationException, SAXException, IOException {
+	public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException {
+		DOMParser domParser = new DOMParser();
+		InventoryList invs = domParser.parse(Const.XML_FILE);
+		invs.getInventory().forEach(System.out::println);
+	}
+
+	public InventoryList parse(String fileName) throws ParserConfigurationException, SAXException, IOException {
+		InputStream in = new FileInputStream(fileName);
+		InventoryList inventoryList = new InventoryList();
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		dbf.setNamespaceAware(true);
 		
@@ -38,25 +45,25 @@ public class DOMParser {
 		});
 
 		Document root = db.parse(in);
-		
-		List<Inventory> inventories = new ArrayList<>();
 
 		Element e = root.getDocumentElement();
 		NodeList xmlInventories = e.getElementsByTagNameNS("*",Const.TAG_INV);
 		for (int i = 0; i < xmlInventories.getLength(); i++) {
-			inventories.add(parseInventory(xmlInventories.item(i)));
+			inventoryList.getInventory().add(parseInventory(xmlInventories.item(i)));
 		}
-		return inventories;
+		return inventoryList;
 	}
 	
 	private Inventory parseInventory(Node node) {
 		NamedNodeMap attrs;
 		Inventory inventory = new Inventory();
+
 		if (node.hasAttributes()) {
 			attrs = node.getAttributes();
 			Node item = attrs.getNamedItem(Const.ATTR_ID);
 			inventory.setId(Integer.parseInt(item.getTextContent()));
 		}
+
 		NodeList nodes = node.getChildNodes();
 		for (int i = 0; i < nodes.getLength(); i++) {
 			Node item = nodes.item(i);
